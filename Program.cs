@@ -25,6 +25,8 @@ Scene2_OneDoor();
 /// </summary>
 static void Scene1_TheMuseumOfBadDice()
 {
+    
+    
     Section("1.  The museum of bad dice");
 
     Exhibit("an ordinary roll", () => Dice.Of(2, 6));

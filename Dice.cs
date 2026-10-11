@@ -79,6 +79,9 @@ public record Dice
     //  The factory method -- the only way in
     // ─────────────────────────────────────────────────────────────────────────
 
+    private static readonly int[] _validSides = 
+        [2, 4, 6, 8, 10, 12, 20, 100];
+    
     /// <summary>
     /// Builds a set of dice, or refuses to.  The only door;  every set of dice
     /// in the entire program comes through here.
@@ -95,6 +98,14 @@ public record Dice
             throw new ArgumentOutOfRangeException(
                 nameof(count), count, $"A roll uses between 1 and {MaxCount} dice.");
 
+        if (!_validSides.Contains(sides))
+            throw new ArgumentOutOfRangeException(
+                nameof(sides), sides, $"YOU CAN'T MAKE {sides} SIDED DICE");
+        
+        if(Math.Abs(modifier) > 100)
+            throw new ArgumentOutOfRangeException(
+                nameof(modifier),modifier, $"{modifier} modifier is greater than 100");
+        
         // TODO (Step 2): `sides` is wide open.  One side makes a token, zero
         //                sides makes a paradox, and -4 sides makes
         //                Random.Next() throw from deep inside the standard
